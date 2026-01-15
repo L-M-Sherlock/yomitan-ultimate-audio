@@ -48,6 +48,10 @@ npm run dev
 
 Default URL: `http://127.0.0.1:8787`
 
+Port configuration:
+
+- Set `PORT` in `.env` to change the listen port (default `8787`).
+
 ## Yomitan configuration
 
 Set the Audio Source URL to:
