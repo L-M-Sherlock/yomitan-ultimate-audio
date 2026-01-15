@@ -3,19 +3,19 @@
 	"version": "0.0.0",
 	"private": true,
 	"scripts": {
-		"deploy": "wrangler deploy",
-		"dev": "wrangler dev",
-		"start": "wrangler dev",
-		"cf-typegen": "wrangler types"
+		"dev": "tsx src/server.ts",
+		"start": "tsx src/server.ts",
+		"db:init": "tsx scripts/init-local-db.ts"
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20250409.0",
 		"prettier": "^3.5.3",
 		"typescript": "^5.5.2",
-		"wrangler": "^4.7.0"
+		"@types/node": "^22.10.7",
+		"tsx": "^4.19.2"
 	},
 	"dependencies": {
 		"aws4fetch": "^1.0.20",
+		"better-sqlite3": "^11.5.0",
 		"itty-fetcher": "^0.9.4",
 		"itty-router": "^5.0.18"
 	}

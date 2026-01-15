@@ -46,7 +46,7 @@ for folder in "${folders[@]}"; do
   rclone lsf "temp_r2:$BUCKET/$folder" --recursive --files-only --config="$TEMP_CONFIG" > "${folder}_remote.txt"
 
   # List local files (relative to the folder) using find.
-  find "data/$folder" -type f -printf '%P\n' > "${folder}_local.txt"
+  (cd "data/$folder" && find . -type f | sed 's|^\./||') > "${folder}_local.txt"
 
   # Sort both files and use 'comm' to find files present locally but missing remotely.
   comm -23 <(sort "${folder}_local.txt") <(sort "${folder}_remote.txt") > "${folder}_missing.txt"
