@@ -51,7 +51,7 @@ export function createEnv(): Env {
         throw new Error(`AUDIO_DATA_PATH does not exist: ${audioDataPath}`);
     }
     if (!existsSync(dbPath)) {
-        throw new Error(`Database file not found at ${dbPath}. Run npm run db:init first.`);
+        throw new Error(`Database file not found at ${dbPath}. Please run \`npm run db:init\` from the project root directory.`);
     }
 
     const authenticationEnabled = parseBoolean(process.env.AUTHENTICATION_ENABLED, true);
