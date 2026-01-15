@@ -1,10 +1,14 @@
 .vscode
 .wrangler
 .dev.vars
+.env
+.env.local
 bundled
 node_modules
 wrangler.toml
 data/*files
+data/*.db
+data/tts_files
 *txt
 *zip
 *sql
