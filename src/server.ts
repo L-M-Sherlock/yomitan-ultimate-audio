@@ -104,11 +104,11 @@ function parsePort(value: string | undefined, fallback: number): number {
 }
 
 loadEnvFile();
+const DEFAULT_PORT = 8787;
 const env = createEnv();
 const host = process.env.HOST || '127.0.0.1';
-const port = parsePort(process.env.PORT, 8787);
+const port = parsePort(process.env.PORT, DEFAULT_PORT);
 const fallbackOrigin = `http://${host}:${port}`;
-
 const server = createServer((req, res) => {
     void requestHandler(req, res, env, fallbackOrigin);
 });
