@@ -62,3 +62,49 @@ If authentication is disabled, omit the `apiKey` parameter.
 
 - TTS is optional. Set `AWS_POLLY_ENABLED=false` to disable it.
 - You can override the SQL path used for initialization with `SQL_PATH`.
+
+## macOS background service (launchd)
+
+Create and load the agent (one-time setup):
+
+```
+cat <<'EOF' > ~/Library/LaunchAgents/com.yomitan.audio.local.plist
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.yomitan.audio.local</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/zsh</string>
+      <string>-lc</string>
+      <string>cd /Users/jarrettye/Codes/yomitan-ultimate-audio && npm run dev</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/yomitan-audio.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/yomitan-audio.err.log</string>
+  </dict>
+</plist>
+EOF
+
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.yomitan.audio.local.plist
+```
+
+Stop the service:
+
+```
+launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.yomitan.audio.local.plist
+```
+
+Logs:
+
+```
+tail -n 200 /tmp/yomitan-audio.out.log
+tail -n 200 /tmp/yomitan-audio.err.log
+```
