@@ -17,8 +17,28 @@ if (!existsSync(sqlPath)) {
 mkdirSync(path.dirname(dbPath), { recursive: true });
 const db = new Database(dbPath);
 const sql = readFileSync(sqlPath, 'utf8');
+const hasTransaction = /^\s*BEGIN(?:\s+TRANSACTION)?\b/i.test(sql);
+const importSql = hasTransaction ? sql : `BEGIN IMMEDIATE;\n${sql}\nCOMMIT;`;
 
 console.log(`Initializing database at ${dbPath} using ${sqlPath}...`);
-db.exec(sql);
-db.close();
+db.pragma('journal_mode = MEMORY');
+db.pragma('synchronous = OFF');
+db.pragma('temp_store = MEMORY');
+db.pragma('cache_size = -200000');
+db.pragma('locking_mode = EXCLUSIVE');
+db.pragma('foreign_keys = OFF');
+
+try {
+    db.exec(importSql);
+} catch (error) {
+    if (db.inTransaction) {
+        db.exec('ROLLBACK');
+    }
+    throw error;
+} finally {
+    db.pragma('locking_mode = NORMAL');
+    db.pragma('synchronous = NORMAL');
+    db.pragma('journal_mode = DELETE');
+    db.close();
+}
 console.log('Database initialization complete.');
