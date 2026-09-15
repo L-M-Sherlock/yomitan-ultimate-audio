@@ -82,8 +82,8 @@ export async function sortResults(entries: AudioEntry[], names: string[]): Promi
     const getMatchTypePriority = (name?: string): number => {
         if (!name) return 3;
         if (name.includes('(Expression+Reading)')) return 0;
-        if (name.includes('(Only Expression)')) return 1;
-        if (name.includes('(Only Reading)')) return 2;
+        if (name.includes('(Only Reading)')) return 1;
+        if (name.includes('(Only Expression)')) return 2;
         return 3;
     };
 
