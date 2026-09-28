@@ -18,5 +18,9 @@
 		"better-sqlite3": "^11.5.0",
 		"itty-fetcher": "^0.9.4",
 		"itty-router": "^5.0.18"
+	},
+	"allowScripts": {
+		"better-sqlite3": true,
+		"esbuild": true
 	}
 }

@@ -20,7 +20,7 @@ npm install
 
 ### 2) Prepare audio data
 
-Download the audio data and place it under `data/`. You should have folders like `nhk16_files`, `daijisen_files`, etc. in that directory.
+Download the audio data (`yomitan_ultimate_audio_source.zip`, about 5 GB) from the [Animecards Discord](https://animecards.site/discord/) and unzip it under `data/`. You should have folders like `nhk16_files`, `daijisen_files`, etc. in that directory.
 
 ### 3) Initialize the local database
 
@@ -112,3 +112,16 @@ Logs:
 tail -n 200 /tmp/yomitan-audio.out.log
 tail -n 200 /tmp/yomitan-audio.err.log
 ```
+
+## Windows one-click installer (tray app)
+
+1. Download the audio data (see [Prepare audio data](#2-prepare-audio-data)).
+2. Double-click `windows-install.cmd`. When asked, select either the downloaded zip (it gets unzipped for you) or, if you already unzipped it, the `entry_and_pitch_db.sql` file in that folder.
+
+It sets everything up and runs the server in the background, with a tray icon to:
+
+- start or stop the server
+- copy the Yomitan URL
+- turn start with Windows on or off
+
+To remove it, run `windows-uninstall.cmd`.
