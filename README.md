@@ -112,3 +112,7 @@ Logs:
 tail -n 200 /tmp/yomitan-audio.out.log
 tail -n 200 /tmp/yomitan-audio.err.log
 ```
+
+## Windows one-click installer (tray app)
+
+All you need beforehand is the audio data download (see Setup step 2). Then double-click `windows-install.cmd` and select the zip when asked. It sets everything up and runs the server in the background with a tray icon to start, stop, or copy the Yomitan URL, with optional start with Windows. To remove it, run `windows-uninstall.cmd`.
